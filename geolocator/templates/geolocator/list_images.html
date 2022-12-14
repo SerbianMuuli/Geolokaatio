@@ -1,0 +1,17 @@
+{% extends "geolocator/index.html" %}
+
+{% load static &}
+
+{% block content %}
+
+<div class="map_image">
+    
+    {{image_map|safe}}
+    {{test_list}}
+
+    <div class="goback">
+        <a href="{% url 'geolocator:index' %}">Etusivu</a>
+    </div>
+</div>
+
+{% endblock %}

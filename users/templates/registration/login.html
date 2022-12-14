@@ -1,0 +1,18 @@
+{% extends "geolocator/index.html" %}
+{% load static %}
+{% block content %}
+{% load crispy_forms_tags %}
+<div class="login_content">
+	<div class="login_field">
+		<form method='POST'>
+            {%csrf_token%}
+            {{form|crispy}} 
+			<button name="submit">Kirjaudu</button>
+		</form>
+	</div>
+    <div class="login_goback">
+        <a href="{% url 'geolocator:index' %}">Takaisin</a>
+    </div>
+</div>
+
+{% endblock content %}

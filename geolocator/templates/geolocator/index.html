@@ -1,0 +1,119 @@
+
+{% load static %}
+<!--define doctype-->
+<!DOCTYPE html>
+<html>
+<!-- container for title, style, meta, links, script, base-->
+<head>
+    
+    <!--meta tag to control size and shape of viewport to scale properly on pc/mobile-->
+    <meta name="viewport" content="with=device-width, initial-scale=1.0">
+    <!-- Page title-->
+    <title>Grumpy geolocator</title>
+    <!--link rel(ation) to css file for style parameters-->
+    <link rel="stylesheet" type="text/css" href= "{% static 'css\style.css' %}"/>
+        <!--important shit for the leaflet maps-->
+
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+        <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.2/dist/leaflet.css" integrity="sha256-sA+zWATbFveLLNqWO2gtiw3HL/lh1giY/Inf1BJ0z14=" crossorigin=""/>
+        <script src="https://unpkg.com/leaflet@1.9.2/dist/leaflet.js" integrity="sha256-o9N1jGDZrf5tS+Ft4gbIK7mYMipq9lqpVJ91xHSyKhg=" crossorigin=""></script>
+    	<style>
+            .leaflet-container {
+                display: block;
+                min-height: 300px;
+                min-width: 200px;
+                max-width: 100%;
+                max-height: 100%;
+            }
+        </style>
+
+        <!--important shit for the leaflet maps above-->
+</head>
+<!--Body of the document(page) eg. heading, paragraphs, img, links, tables, lists etc-->
+<body>
+    <!--div = general purpose container for elements-->
+    <!--navigation bar-->
+    <div class="navigation">
+        <!--fullpage background video-->
+        
+<!--        <video preload="metadata" autoplay loop muted plays-inline class="bg-video"> -->
+<!--           <source src="{% static 'bg_video3.m4v' %}" type="video/mp4"> -->
+<!--       </video> -->
+
+        <!--nav element for links and other pages-->
+        <nav>
+            <!--ggl logo-->
+            <img src="{% static 'logo2.png' %}" class="logo">
+            <!--list items with hyperlinks to navigate site-->
+            <!--ul - defining unordered list-->
+            <ul>
+                {% if user.is_authenticated %}
+                <!--dropdown if user logged in-->
+                <div class="dropdown">
+                    <button class="dropbutton">{{ user.username }}</button>
+                    <div class="dropdown-content">
+                        <a href="{% url 'geolocator:index' %}">Etusivu</a>
+                        <a href="{% url 'geolocator:profile' %}">Profiili</a>
+                        <a href="{% url 'geolocator:add_image' %}">Lisää kuvia</a>
+                        <a href="{% url 'geolocator:list_images' %}">Tutki karttaa</a>
+                        <a href="{% url 'users:logout' %}">Kirjaudu ulos</a>
+                    </div>
+                </div>
+
+                {% else %}
+                <!--dropdown menu if not logged in-->
+                <div class="dropdown">
+                    <button <button onclick="myFunction()" class="dropbutton">Päävalikko</button>
+                    <div class="dropdown-content">
+                        <a href="{% url 'geolocator:index' %}">Etusivu</a>
+                        <a href="{% url 'users:register' %}">Rekisteröidy</a>
+                        <a href="{% url 'users:login' %}">Kirjaudu sisään</a>
+                        <a href="{% url 'geolocator:list_images' %}">Tutki karttaa</a>
+                    </div>
+                </div>
+                {% endif %}
+            </ul>
+        </nav>
+        {% block content %}
+        {% if user.is_authenticated %}
+    <!--WHEN USER LOGGED IN-->
+    <!--Page content area-->
+    <div class="content">
+        <!--Header element-->
+        <h1> Tervetuloa {{ user.username }}! </h1>
+        <!--text element under header-->
+        <div>
+            <i> Tähän voi lisätä kaikkea turhaa paskadataa joskus</i>
+        </div>
+        <!--link element-->
+        <a href="{% url 'geolocator:add_image' %}""> Lisää kuvia
+            <img src="{% static 'map_pin2.png' %}" class="linkpin"></a>
+
+        <a href="{% url 'geolocator:list_images' %}"> Tutki karttaasi
+            <img src="{% static 'map_pin2.png' %}" class="linkpin"></a>
+    </div>
+
+    {% else %}
+    <!--WHEN NOT LOGGED IN-->
+    <!--Page content area-->
+    <div class="content">
+        <!--Header element-->
+        <h1> GRUMPY GEOLOCATOR </h1>
+        <!--text element under header-->
+        <div>
+            <i> Add pictures with location data
+                and other cool shit
+            </i>
+        </div>
+        <!--link element-->
+        <a href="{% url 'users:register' %}"> Rekisteröi käyttäjä
+            <img src="{% static 'map_pin2.png' %}" class="linkpin"></a>
+
+        <a href="{% url 'users:login' %}"> Kirjaudu sisään
+            <img src="{% static 'map_pin2.png' %}" class="linkpin"></a>
+    </div>
+    {% endif %}
+    {% endblock %}
+    </div>
+</body>
+</html>

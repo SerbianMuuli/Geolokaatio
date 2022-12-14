@@ -1,0 +1,90 @@
+
+<!--Load tag library-->
+{% load bootstrap5 %}
+<p style="text-align:center;">
+    <a class="navbar-brand" href="{% url 'geolocator:index' %}"> <img src="https://i.imgur.com/fAwFcVm.png" style="width: 50vw"/>
+</p>
+<!-- Set doctype to html-->
+<!doctype html>
+<!--Set language-->
+<html lang="en">
+    <!--metadata-->
+    <head>
+        <!--select char encoder-->
+        <meta charset="utf-8">
+        <!--optimize site for mobile devices, width: max width from device -->
+        <meta name="viewport" content="width=device-width, initial-scale=1" />
+        <!--set title-->
+        <title>GeoLocator</title>
+        <!--Load CSS and Javascript-->
+        {% bootstrap_css %}
+        {% bootstrap_javascript %}
+        <!--include BS CSS-->
+        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-Zenh87qX5JnK2Jl0vWa8Ck2rdkQ2Bzep5IDxbcnCeuOxjzrPF/et3URy9Bv1WTRi" crossorigin="anonymous">
+        <!--include jquery, needed in add_image for rendering the map-->
+        <!--important shit for the leaflet maps-->
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+        <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.2/dist/leaflet.css" integrity="sha256-sA+zWATbFveLLNqWO2gtiw3HL/lh1giY/Inf1BJ0z14=" crossorigin=""/>
+        <script src="https://unpkg.com/leaflet@1.9.2/dist/leaflet.js" integrity="sha256-o9N1jGDZrf5tS+Ft4gbIK7mYMipq9lqpVJ91xHSyKhg=" crossorigin=""></script>
+    	<style>
+            .leaflet-container {
+                height: 400px;
+                width: 600px;
+                max-width: 100%;
+                max-height: 100%;
+            }
+        </style>
+        <!--important shit for the leaflet maps above-->
+    
+    </head>
+
+    <!--define body of the document-->
+    <body style="background-color: powderblue">
+        <!--Navigation Bar-->
+        <nav class="navbar navbar-expand-sm bg-dark navbar-dark">
+            <div class="container-fluid">
+            <a class="navbar-brand" href="{% url 'geolocator:index' %}">
+                <img src="https://i.imgur.com/k49ghRJ.jpg" alt="Avatar Logo" style="width:40px;" class="rounded-pill">
+            </a>
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#collapsenavbar">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="collapsenavbar">
+                <ul class="navbar-nav">
+                <li class="nav-item">
+                    <a class="nav-link" href="{% url 'geolocator:add_image' %}">Add image</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="#">Link</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="#">Link</a>
+                </li>
+                </ul>
+            </div>
+            </div>
+        </nav>
+        <!--include BS Javascrpt, popper-->
+        <script
+            src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js" integrity="sha384-oBqDVmMz9ATKxIep9tiCxS/Z9fNfEXiDAYTujMAeBAsjFuCZSmKbSSUnQlmh/jp3" crossorigin="anonymous">
+        </script>
+        <script 
+            src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-OERcA2EqjJCMA+/3y+gxIOqMEjwtxJY7qPCqsdltbNJuaOe923+mo//f6V8Qbsw3" crossorigin="anonymous">
+        </script>
+        
+        
+        <main role="main" class="container">
+
+            <div class="pb-2 mb-2 border-bottom">
+                {% block page_header %}
+                {% endblock page_header %}
+            </div>
+
+            <div>
+                {% block content %}
+                {% endblock content %}
+            </div>
+
+        </main>
+    </body>
+</html>

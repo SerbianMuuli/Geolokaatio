@@ -1,0 +1,91 @@
+{% extends "geolocator/index.html" %}
+
+{% load static %}
+
+{% block content %}
+
+{% if user.is_authenticated %}
+
+<div class="add_image">
+    <p class="kuvaus_map_image"> 1. Valitse kuva
+        2. Lisää kuvaus
+        3. Käytä nykyistä sijaintia (oletus) tai valitse sijainti klikkaamalla karttaa</p>
+    <div class=add_map id="map"></div>
+        <div class="add_image_form">
+            <div class="form_container">
+                <form action="{% url 'geolocator:add_image' %}" method="post" enctype="multipart/form-data">
+                    {{form.media}}
+                    {% csrf_token %}
+                    {{form.as_p}}
+                    <button name="submit">Lisää kuva</button>
+                </form>
+            </div>
+            <div class="add_image_goback">
+                <a href="{% url 'geolocator:index' %}">Etusivu</a>
+            </div>
+        </div>
+</div>
+<script>
+
+    const map = L.map('map').setView([0, 0], 13);
+
+    L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
+        maxZoom: 19,
+        attribution: '&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>'
+    }).addTo(map);
+
+
+    map.locate({setView: true, enableHighAccuracy: true, maxZoom: 15});
+
+    var marker = L.marker([0.0, 0.0], { color: 'red' }).addTo(map);
+
+    function onMapClick(e) {
+        document.getElementById("id_image_lat_long").innerText = e.latlng.toString();
+        marker.setLatLng(e.latlng)
+    };
+
+    function onLocationFound(e) {
+        var radius = e.accuracy;
+        L.marker(e.latlng).addTo(map);
+        L.circle(e.latlng, radius).addTo(map);
+        document.getElementById("id_image_lat_long").innerText = e.latlng;
+    };
+
+    map.on('locationfound', onLocationFound);
+    map.on('click', onMapClick);
+
+</script>
+
+<!--important shit for the leaflet maps
+            This needs to be applied into websites head-tags. The styling has to present
+            so that the map is visible
+
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+        <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.2/dist/leaflet.css" integrity="sha256-sA+zWATbFveLLNqWO2gtiw3HL/lh1giY/Inf1BJ0z14=" crossorigin=""/>
+        <script src="https://unpkg.com/leaflet@1.9.2/dist/leaflet.js" integrity="sha256-o9N1jGDZrf5tS+Ft4gbIK7mYMipq9lqpVJ91xHSyKhg=" crossorigin=""></script>
+    	<style>
+            .leaflet-container {
+                height: 400px;
+                width: 600px;
+                max-width: 100%;
+                max-height: 100%;
+            }
+        </style>
+
+        important shit for the leaflet maps above-->
+
+{% else %}
+
+<div class="access_error">
+    <h1>
+        Sinulla ei ole oikeuksia tälle sivulle
+    </h1>
+    <div class="access_error_goback">
+        <a href="{% url 'geolocator:index' %}">Etusivulle</a>
+        <a href="{% url 'users:login' %}">Kirjaudu sisään</a>
+        <a href="{% url 'users:register' %}">Rekisteröidy</a>
+    </div>
+</div>
+
+{% endif %}
+{% endblock content %}

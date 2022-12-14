@@ -1,0 +1,687 @@
+/* 
+value order (amount, percentage)
+order from edge of the page: Margin -> Border -> Padding -> Content
+margin - margin area thickness 
+padding - padding area thickness
+box-sizing: border-box adds padding + border values to total height and width of element
+position: 
+    relative - positions element relative to its normal pos
+    absolute - positions relative to nearest positioned ancestor
+display:flex - auto align child elements with parent elements
+scaling: % - max size, vh - caps to height value
+align-items: align flex items along the cross axis by the value in flex container
+justify-content: define how browser spaces content inside the element/container
+*/
+
+
+/* ALL ELEMENTS */
+*{
+
+    margin: 0;
+    padding: 0;
+    font-family: 'Poppins', sans-serif;
+    box-sizing:  border-box;
+    position: relative;
+    
+}
+
+html, body{
+    height: 110%;
+    width: 100%;
+    overflow-x: hidden;
+}
+
+.ignore-css{
+    all:unset;
+    color: #FFF;
+}
+
+
+/* CLASS = "NAVIGATION"*/
+.navigation{
+    background: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url('\\static\\bg_hki.jpg');
+    background-size: cover;
+    position: absolute;
+    padding: 2% 2%;
+    display: flex;
+
+    align-items: center;
+    justify-content: center;
+
+    min-height: 100%;
+    min-width: 100%;
+
+    width: 100%;
+    height: auto;
+}
+
+
+/* NAV BAR ELEMENTS */
+nav{
+    width: 100%;
+    display: inline-block;
+    position: absolute;
+    top: 0;
+    left: 0;
+    padding: 20px 8%;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+/* NAV BAR CLASS = "LOGO"*/
+nav .logo{
+    width: 200px;
+}
+
+
+
+.dropbutton{
+    position: relative;
+    background-color: transparent;
+    display: inline-block;
+    color: white;
+    font-size: 20px;
+    border: 2px solid #FFF;
+    padding: 10px 10px;
+    border-radius: 10px;
+    margin-top: 20px;
+    margin-right: 50px;
+    cursor: pointer;
+    transition: color .2s ease-in-out, box-shadow .2s ease-in-out;
+}
+
+
+.dropbutton:hover {
+    color: #fff;
+    box-shadow: inset 200px 0 0 0 rgba(46, 143, 240,0.6);;
+}
+
+
+.dropdown {
+    background-color: transparent;
+    position: relative;
+    margin-left: 20px;
+    display: inline-block;
+  }
+
+.dropdown-content {
+    display: none;
+    position: absolute;
+    background-color: none;
+    min-width: 160px;
+    box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);;
+    z-index: 1;
+  }
+
+.dropdown:hover .dropdown-content {display: block;}
+
+.dropdown-content a{
+    color: #FFF;
+    padding: 12px 16px;
+    text-decoration: none;
+    display: flex;
+    transition: color .2s ease-in-out, box-shadow .2s ease-in-out;
+
+}
+
+.dropdown-content a:hover {
+    color: #fff;
+    box-shadow: inset 200px 0 0 0 rgba(46, 143, 240,0.6);;
+}
+
+
+/*  LIST ITEMS
+    list-style: define style of the presented list, none = no markers
+        other options: circle, square, upper-roman, lowe-alpha
+    display: inline-block - list elements as a row */
+nav ul li{
+    list-style: none;
+    display: inline-block;
+    margin-left: 20px;
+    
+}
+
+/*  LIST HYPERLINKS
+    text-decoration - select style of decoration for hyperlinks. none: no underlines etc */
+    nav ul li a{
+    text-decoration: none; 
+    color: #FFF;
+    border: 2px solid #FFF;
+    padding: 5px 15px;
+    border-radius: 20px;
+    margin-top: 20px;
+    transition: color .2s ease-in-out, box-shadow .2s ease-in-out;
+}
+
+    nav ul li a:hover {
+    color: #fff;
+    box-shadow: inset 200px 0 0 0 rgba(46, 143, 240,0.6);;
+}
+
+
+/* CONTENT AREA GENERAL SETTINGS */
+.content{
+    text-align: center;
+    width: min(1600,100%);
+    height: auto;
+    
+}
+
+/* CONTENT HEADER */
+.content h1{
+    text-align: center;
+    color: #FFF;
+    font-size: 40px;
+    font-weight: 600;
+}
+
+/* CONTENT text */
+.content i{
+    text-align: center;
+    color: #FFF;
+    font-size: 20px;
+}
+/* CONTENT LINK */
+.content a{
+    box-shadow: inset 0 0 0 0 #54b3d6;
+    text-decoration: none;
+    display: inline-block;
+    color: #FFF;
+    font-size: 20px;
+    border: 2px solid #FFF;
+    padding: 15px 20%;
+    border-radius: 10px;
+    margin-top: 20px;
+    transition: color .2s ease-in-out, box-shadow .2s ease-in-out;
+}
+
+/* CONTENT LINK HOVER ANIM */
+.content a:hover {
+    color: #fff;
+    box-shadow: inset 600px 0 0 0 rgba(46, 143, 240,0.6);;
+}
+
+/* CONTENT LINK PIN LOGO */
+.content .linkpin{
+    position: relative;
+    width: 15px;
+    margin-top: 5px;
+}
+
+
+/* BG VIDEO */
+.bg-video{
+    position: absolute;
+    right: 0;
+    bottom: 0;
+    z-index: -1;
+}
+
+/* background video scale on page resize */
+@media (min-aspect-ratio: 16/9){
+    .bg-video{
+        width: 100%;
+        height: auto;
+    }
+}
+
+@media (max-aspect-ratio: 16/9){
+    .bg-video{
+        width: auto;
+        height: 100%;
+    }
+}
+
+.map_image{
+        margin: 2px;
+        border: 10vh;
+        outline: solid medium white;
+        height: 70%;
+        width: min(1000px,100%);
+        position: relative;
+        border-radius: 2px 2px;
+        z-index: 0;
+}
+
+/* CRISPY FORMS STYLE */
+
+input[type="text"],input[type="email"],input[type="password"], textarea {
+
+    background-color : #d1d1d167;
+    color: white;
+    border: none;
+    height: 25px;
+    width: min(650px,100%);
+    border-radius: 2px;
+
+  }
+
+input, select, textarea {
+    font-size: 100%;
+}
+    
+/* REGISTER PAGE */
+
+
+.pakollinen{
+    margin-top: -40px;
+    border: 1px;
+    padding: 1px;
+    position: absolute;
+    font-size: small;
+    height: auto;
+    color: #FFF;   
+    
+}
+
+.content_form{
+    margin-top: 15vh;
+    border: 1px;
+    padding: 1px;
+    height: auto;
+    width: min(650px,100%);
+    position: relative;
+    font-size: medium;
+    height: auto;
+    color: #FFF;
+    
+}
+
+.form_fields{
+    outline: solid medium white;
+    padding: 15px;
+    color: #FFF;
+    position: relative;
+    line-height: 28px;
+    line-height-step: 60;
+    margin: 0px;
+    width: min(500px,auto);
+    height: auto;
+    background-image: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5))
+
+}
+
+.form_fields ul{
+    list-style-type: square;
+    list-style: inside;
+    color: #FFF;
+    position: relative;
+    
+}
+
+
+.form_fields button{
+    background-color: transparent;
+    text-decoration: none;
+    display: inline-block;
+    color: white;
+    padding: 16px;
+    font-size: 15px;
+    border: 2px solid #FFF;
+    padding: 5px 20px;
+    border-radius: 5px, 5px;
+    margin-top: 15px;
+    
+    transition: color .2s ease-in-out, box-shadow .2s ease-in-out;
+}
+
+.form_fields button:hover{
+    color: #fff;
+    box-shadow: inset 600px 0 0 0 rgba(46, 143, 240,0.6);;
+}
+
+.form_fields button a{
+    color: #FFF;
+    text-decoration: none;
+}
+
+.goback a{
+    position: absolute;
+    background-color: transparent;
+    text-decoration: none;
+    display: inline-block;
+    color: white;
+    padding: 16px;
+    font-size: 15px;
+    border: 2px solid #FFF;
+    padding: 5px 20px;
+    border-radius: 5px, 5px;
+    margin-top: 15px;
+    margin-left: 15x;
+    transition: color .2s ease-in-out, box-shadow .2s ease-in-out;
+}
+
+.goback a:hover{
+    color: #fff;
+    box-shadow: inset 600px 0 0 0 rgba(46, 143, 240, 0.6);;
+}
+
+
+
+/* LOGIN */
+
+.login_content{
+    outline: solid medium white;
+    border-radius: 5px 5px;
+    width: min(250px, 800px);
+    height: auto;
+    
+}
+
+.login_field{
+    outline: solid medium white;
+    padding: 15px;
+    color: #FFF;
+    position: relative;
+    line-height: 28px;
+    line-height-step: 60;
+    margin: 0px;
+    width: min(250px,800px);
+    height: auto;
+    background-image: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5))
+
+}
+
+.login_field ul{
+    list-style-type: inside;
+    list-style: none;
+    color: #FFF;
+    position: relative;
+    
+}
+
+.login_field button{
+
+    background-color: transparent;
+    text-decoration: none;
+    display: inline-block;
+    color: white;
+    padding: 16px;
+    font-size: 15px;
+    border: 2px solid #FFF;
+    padding: 5px 20px;
+    border-radius: 5px, 5px;
+    margin-top: 15px;
+    transition: color .2s ease-in-out, box-shadow .2s ease-in-out;
+}
+
+.login_field button:hover{
+    color: #fff;
+    box-shadow: inset 600px 0 0 0 rgba(46, 143, 240,0.6);;
+}
+
+.login_goback a{
+    position: absolute;
+    background-color: transparent;
+    text-decoration: none;
+    display: inline-block;
+    color: white;
+    padding: 16px;
+    font-size: 15px;
+    border: 2px solid #FFF;
+    padding: 5px 15px;
+    border-radius: 5px;
+    margin-top: 15px;
+    transition: color .2s ease-in-out, box-shadow .2s ease-in-out;
+}
+
+.login_goback a:hover{
+    color: #fff;
+    box-shadow: inset 600px 0 0 0 rgba(46, 143, 240, 0.6);;
+}
+
+/* LOGOUT */
+
+
+.logout_content{
+    text-align: center;
+}
+
+/* CONTENT HEADER */
+.logout_content h1{
+    max-width: 800px;
+    text-align: center;
+    color: #FFF;
+    font-size: 40px;
+    font-weight: 600;
+}
+
+.logout_goback a{
+    position: relative;
+    background-color: transparent;
+    text-decoration: none;
+    display: inline-block;
+    color: white;
+    padding: 16px;
+    font-size: 15px;
+    border: 2px solid #FFF;
+    padding: 5px 15px;
+    border-radius: 5px;
+    margin-top: 20px;
+    margin-left: 20px;
+    transition: color .2s ease-in-out, box-shadow .2s ease-in-out;
+}
+
+.logout_goback a:hover{
+    color: #fff;
+    box-shadow: inset 600px 0 0 0 rgba(46, 143, 240, 0.6);;
+}
+
+
+/* ACCESS ERROR */
+
+.access_error{
+    text-align: center;
+}
+
+.access_error h1{
+    max-width: 800px;
+    text-align: center;
+    color: #FFF;
+    font-size: 40px;
+    font-weight: 600;
+}
+
+.access_error_goback a{
+    position: relative;
+    background-color: transparent;
+    text-decoration: none;
+    display: inline-block;
+    color: white;
+    padding: 16px;
+    font-size: 15px;
+    border: 2px solid #FFF;
+    padding: 5px 15px;
+    border-radius: 5px;
+    margin-top: 20px;
+    margin-left: 20px;
+    transition: color .2s ease-in-out, box-shadow .2s ease-in-out;
+}
+
+.access_error_goback a:hover{
+    color: #fff;
+    box-shadow: inset 600px 0 0 0 rgba(46, 143, 240, 0.6);;
+}
+
+
+
+/* ADD IMAGE */
+
+.add_image{
+    resize: both;
+    margin: 10px;
+    width: auto;
+    max-width: 90vw;
+    height: auto;
+    position: fixed;
+    top: 20vh;
+    bottom: 50vh;
+    font-size: medium;
+    color: #FFF;
+}
+
+.add_map{
+    margin: 20px;
+    outline: solid medium white;
+    height: 50vh;
+    width: inherit;
+    position: relative;
+    border-radius: 2px 2px;
+    z-index: 0;
+    
+}
+
+.kuvaus_map_image{
+    
+    margin: 20px;
+    margin-bottom: 20px;
+    border: 1px;
+    padding: 1px;
+    position: relative;
+    font-size: medium;
+    height: inherit;
+    width: inherit;
+    color: #FFF;   
+}
+
+
+.add_image_form{
+    margin: 20px;
+    outline: solid medium white;
+    color: #FFF;
+    font-size: small;
+    position: relative;
+    width: inherit;
+    height: inherit;
+    margin-top: 5px;
+    
+    background-image: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5))
+
+}
+
+.form_container{
+    line-height: 25px;
+    padding: 15px;
+    list-style: none;
+    list-style-position: inside;
+    display: inline-table;
+
+}
+
+
+.add_image_form ul {
+
+    color: #FFF;
+    position: relative;
+}
+
+.add_image_form button{
+    
+    background-color: transparent;
+    text-decoration: none;
+    display: inline-block;
+    color: white;
+    padding: 16px;
+    font-size: 15px;
+    border: 2px solid #FFF;
+    padding: 5px 15px;
+    border-radius: 5px;
+    margin-top: 15px;
+    transition: color .2s ease-in-out, box-shadow .2s ease-in-out;
+
+}
+
+.add_image_form button:hover{
+    color: #fff;
+    box-shadow: inset 600px 0 0 0 rgba(46, 143, 240, 0.6);;
+}
+
+.add_image_goback a{
+    position: absolute;
+    background-color: transparent;
+    text-decoration: none;
+    display: inline-block;
+    color: white;
+    padding: 15px;
+    font-size: 15px;
+    border: 2px solid #FFF;
+    padding: 2px 15px;
+    border-radius: 5px, 5px;
+    margin-top: 20px;
+    transition: color .2s ease-in-out, box-shadow .2s ease-in-out;
+}
+
+.add_image_goback a:hover{
+    color: #fff;
+    box-shadow: inset 600px 0 0 0 rgba(46, 143, 240, 0.6);;
+}
+
+
+/* PROFILE PAGE */
+
+.profile_box {
+    resize: both;
+    margin-top: 50px;
+    width: auto;
+    max-width: 90vw;
+    height: auto;
+    position: fixed;
+
+    top: 200px;
+    bottom: 50vh;
+    font-size: medium;
+    color: #FFF;
+}
+
+
+.profile_content {
+    margin: 20px;
+    height: inherit;
+    width: inherit;
+    position: relative;
+    border-radius: 2px 2px;
+    z-index: 0;
+    
+    line-height: 25px;
+    padding: 15px;
+    list-style: none;
+    list-style-position: inside;
+    display: inline-table;
+}
+
+.profile_content h1{
+    max-width: 800px;
+    text-align: center;
+    color: #FFF;
+    font-size: 40px;
+    font-weight: 600;
+    line-height: normal;
+}
+
+.edit_username a{
+    position: relative;
+    background-color: transparent;
+    text-decoration: none;
+    display: inline-block;
+    color: white;
+    padding: 15px;
+    font-size: 15px;
+    border: 2px solid #FFF;
+    padding: 2px 15px;
+    border-radius: 5px, 5px;
+    margin-top: 20px;
+    margin-bottom: 50px;
+    transition: color .2s ease-in-out, box-shadow .2s ease-in-out;
+}
+
+.edit_username a:hover{
+    color: #fff;
+    box-shadow: inset 600px 0 0 0 rgba(46, 143, 240, 0.6);;
+}
+
+.profile_content p{
+    text-align: left;
+    color: #FFF;
+    font-size: 20px;
+}
