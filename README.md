@@ -6,6 +6,6 @@ in Windows:
 - Double-click runserver.bat
 
 It will install venv and necessary files, creates the database on first run and starts the server
-Open url from terminal with Chrome (background not loading properly on firefox)
+Open url from terminal with Chrome/Firefox
 
 press ctrl + c and select yes in terminal to shut down server
