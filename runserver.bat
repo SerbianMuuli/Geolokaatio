@@ -1,4 +1,4 @@
-@ECHO OFF
+@ECHO ON
 
 pushd %~dp0
 
@@ -10,7 +10,6 @@ IF NOT EXIST "%VIRTUAL_ENV%\Scripts\activate.bat" (
 )
 
 CALL proj_venv\Scripts\activate.bat
-ECHO ON
 CALL python -m pip install --upgrade pip
 CALL pip install -r requirements.txt
 CALL python manage.py migrate
